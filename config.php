@@ -10,7 +10,7 @@ define('ENCRYPTION_METHOD', 'aes-256-cbc');
 const JULIPAD_VERSION = '0.5.1';
 
 // Admin password for pad creation and deletion
-const ADMIN_PASSWORD = 'julete';
+const ADMIN_PASSWORD = 'CHANGEME';
 
 // Create database and table if they don't exist
 try {
