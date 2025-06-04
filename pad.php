@@ -78,6 +78,7 @@ try {
 
     // Decrypt the content for display
     $decrypted_content = decrypt($pad['content']);
+    file_put_contents('debug.log', "Decrypted content: " . print_r($decrypted_content, true) . "\n", FILE_APPEND);
 } catch(PDOException $e) {
     die("Error: " . $e->getMessage());
 }
@@ -98,12 +99,27 @@ try {
         </div>
         
         <div class="pad-editor">
-            <form action="save_pad.php" method="POST">
+            <form action="save_pad.php" method="POST" onsubmit="document.getElementById('pad-content').value = document.getElementById('editor').innerHTML;">
                 <input type="hidden" name="pad_id" value="<?php echo $pad['id']; ?>">
-                <textarea name="content" id="pad-content"><?php echo htmlspecialchars($decrypted_content); ?></textarea>
+                <div id="toolbar" style="margin-bottom:8px;">
+                    <button type="button" onclick="document.execCommand('bold',false,null);return false;"><b>B</b></button>
+                    <button type="button" onclick="document.execCommand('italic',false,null);return false;"><i>I</i></button>
+                    <button type="button" onclick="document.execCommand('underline',false,null);return false;"><u>U</u></button>
+                    <button type="button" onclick="document.execCommand('insertUnorderedList',false,null);return false;">• List</button>
+                    <button type="button" onclick="document.execCommand('insertOrderedList',false,null);return false;">1. List</button>
+                </div>
+                <div id="editor" contenteditable="true" style="min-height:300px; border:1px solid #ddd; border-radius:4px; padding:1rem; margin-bottom:1rem; background:#fff;">
+<?php echo $decrypted_content; ?>
+                </div>
+                <textarea name="content" id="pad-content" style="display:none;"></textarea>
                 <button type="submit">Save Changes</button>
             </form>
         </div>
     </div>
+    <script>
+    document.querySelector('.pad-editor form').addEventListener('submit', function(e) {
+        document.getElementById('pad-content').value = document.getElementById('editor').innerHTML;
+    });
+    </script>
 </body>
 </html> 

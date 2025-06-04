@@ -3,11 +3,11 @@
 define('DB_FILE', 'simplepad.db');
 
 // Encryption configuration
-define('ENCRYPTION_KEY', bin2hex(random_bytes(32))); // Generate a random 32-byte key
+define('ENCRYPTION_KEY', 'b7e6c1a2d4f8e9b0c3d2e1f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4'); // Fixed 32-byte hex key
 define('ENCRYPTION_METHOD', 'aes-256-cbc');
 
 // App version
-const JULIPAD_VERSION = '0.5.1';
+const JULIPAD_VERSION = '0.6.1';
 
 // Admin password for pad creation and deletion
 const ADMIN_PASSWORD = 'CHANGEME';

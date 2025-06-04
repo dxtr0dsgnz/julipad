@@ -4,6 +4,8 @@ ini_set('display_errors', 1);
 
 require_once 'config.php';
 
+file_put_contents('debug.log', "Raw POST content: " . print_r($_POST['content'], true) . "\n", FILE_APPEND);
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['pad_id']) && isset($_POST['content'])) {
     try {
         $pdo = new PDO('sqlite:' . DB_FILE);
